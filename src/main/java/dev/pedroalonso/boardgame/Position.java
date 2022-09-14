@@ -7,6 +7,13 @@ public class Position {
     private int column;
 
     public Position(int row, int column) {
+        if (row < 0) {
+            throw new RuntimeException("Piece row must be greater than 0");
+        }
+        if (column < 0) {
+            throw new RuntimeException("Piece column must be greater than 0");
+        }
+
         this.row = row;
         this.column = column;
     }
