@@ -1,11 +1,15 @@
 package dev.pedroalonso.application;
 
+import dev.pedroalonso.chess.ChessMatch;
 import dev.pedroalonso.chess.ChessPiece;
 import dev.pedroalonso.chess.ChessPosition;
 import dev.pedroalonso.chess.Color;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class UI {
     // https://stackoverflow.com/questions/5762491/how-to-print-color-in-console-using-system-out-println
@@ -50,6 +54,15 @@ public class UI {
         }
     }
 
+    public static void printMatch(ChessMatch chessMatch, List<ChessPiece> capturedPieces) {
+        printBoard(chessMatch.getPieces());
+        System.out.println();
+        printCapturedPieces(capturedPieces);
+        System.out.println();
+        System.out.println("Turn: " + chessMatch.getTurn());
+        System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
+    }
+
     public static void printBoard(ChessPiece[][] pieces) {
         for (int row = 0; row < pieces.length; row++) {
             System.out.print((8 - row) + " ");
@@ -86,5 +99,25 @@ public class UI {
             System.out.println();
         }
         System.out.println("  a b c d e f g h");
+    }
+
+    private static void printCapturedPieces(List<ChessPiece> captured) {
+        List<ChessPiece> white = captured.stream().filter(p -> p.getColor() == Color.WHITE)
+                .collect(Collectors.toList());
+
+        List<ChessPiece> black = captured.stream().filter(p -> p.getColor() == Color.BLACK)
+                .collect(Collectors.toList());
+
+        System.out.println("Captured pieces: ");
+
+        System.out.print("White: ");
+        System.out.print(ANSI_WHITE);
+        System.out.println(Arrays.toString(white.toArray()));
+        System.out.print(ANSI_RESET);
+
+        System.out.print("Black: ");
+        System.out.print(ANSI_YELLOW);
+        System.out.println(Arrays.toString(black.toArray()));
+        System.out.print(ANSI_RESET);
     }
 }
