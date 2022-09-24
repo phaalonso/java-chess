@@ -1,5 +1,8 @@
 package dev.pedroalonso.boardgame;
 
+import javax.swing.text.html.Option;
+import java.util.Optional;
+
 public class Board {
     private int rows;
     private int columns;
@@ -48,6 +51,22 @@ public class Board {
 
         this.pieces[position.getRow()][position.getColumn()] = piece;
         piece.position = position;
+    }
+
+    public Piece removePiece(Position position) {
+        if (!positionExists(position)) {
+            throw new BoardException("Position not on the board");
+        }
+
+        if (getPiece(position) == null) {
+            return null;
+        }
+
+        Piece aux = getPiece((position));
+        aux.position = null;
+        pieces[position.getRow()][position.getColumn()] = null;
+
+        return aux;
     }
 
     public boolean positionExists(int row, int column) {
