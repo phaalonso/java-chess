@@ -42,9 +42,11 @@ public class Main {
                 System.out.println("capturedPiece = " + capturedPiece);
             } catch (ChessException e) {
                 System.out.println(e.getMessage());
+                e.printStackTrace();
                 sc.nextLine();
             } catch (InputMismatchException e) {
                 System.out.println(e);
+                e.printStackTrace();
                 sc.nextLine();
             }
         }
