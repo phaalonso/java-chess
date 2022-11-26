@@ -1,8 +1,5 @@
 package dev.pedroalonso.boardgame;
 
-import javax.swing.text.html.Option;
-import java.util.Optional;
-
 public class Board {
     private int rows;
     private int columns;
